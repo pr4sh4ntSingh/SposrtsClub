@@ -1,0 +1,36 @@
+package practice;
+
+public class Arrange {
+
+	public static void main(String args[]){
+		
+		
+	}
+	public static int[] uniqueValue(int input1,int[] input2)
+    {
+     int n=input1;
+     int arr[]=input2;
+     int ans[]=new int[n];
+     for(int k=0;k<n;k++){
+              arrange(arr,ans,n,k); 	
+     }
+   	return ans;	
+    }
+	public static void arrange(int arr[],int ans[],int n,int k){
+		int zeroi=indexOfFirstZero(arr,n);
+		ans[k]=zeroi;
+		int elem=arr[zeroi];
+		for(int i=0;i>zeroi;i++){
+					arr[i]--;
+		}
+		
+	}
+	public static int indexOfFirstZero(int arr[],int n){
+		int i=0;
+		while(arr[i]!=0){
+			i++;
+		}
+		arr[i]=-1;
+		return i;
+	}
+}

@@ -1,0 +1,101 @@
+package practice;
+
+public class TrapWater {
+  public static void main(String arga[]){
+	  int i=3;
+	  int j=6;
+	  int k[]={3,3,4,4,4,2,3,1,3,2,1,4,7,3,1,6,4,1};
+	  GetWaterLevel(i,j,k);
+	  
+  }
+  static int GetWaterLevel(int input1,int input2,int input3[])
+  {
+	  int row=input1;
+	  int col=input2;
+	  int arr[][]=MakeArray(input3,row,col);
+	  for(int i=0;i<row;i++){
+		  for(int j=0;j<col;j++){
+			  System.out.print(arr[i][j]);
+		  }
+		  System.out.println();
+		  
+	  }
+	  for(int i=0;i<row;i++){
+		  for(int j=0;j<col;j++){
+			  int u,l,r,lo;
+			  u=UpperBound(arr,i,j);
+			  
+			  lo=LowerBound(arr,i,j,row);
+			  r=RightBound(arr,i,j,col);
+			  l=LeftBound(arr,i,j);
+			  System.out.print(lo+" " );
+			  
+		  }
+		  
+	  }
+  	return 1;
+  }
+  
+  public static int UpperBound(int arr[][],int i,int j){
+	  if(i==0) return 0;
+	  else{
+		  int max=-1;
+		  for(int k=i-1;k>=0;k--){
+			  if(arr[k][j]>max)
+				  max=arr[k][j];
+		  }
+		  return max;
+	  }
+
+  }
+  public static int LowerBound(int arr[][],int i,int j,int row){
+	  if(i==row) return 0;
+	  else{
+		  int max=-1;
+		  for(int k=i+1;k<row;k++){     // go Down !!!!
+			  if(arr[k][j]>max)
+				  max=arr[k][j];
+		  }
+		  return max;
+	  }
+
+  }
+  public static int LeftBound(int arr[][],int i,int j){
+	  if(j==0) return 0;
+	  else{
+		  int max=-1;
+		  for(int k=i;k>=0;k--){     // go left !!!!
+			  if(arr[i][k]<max)
+				  max=arr[i][k];
+		  }
+		  return max;
+	  }
+
+  }
+  public static int RightBound(int arr[][],int i,int j,int col){
+	  if(j==col) return 0;
+	  else{
+		  int max=-1;
+		  for(int k=j;k<col;k++){     // go right !!!!
+			  if(arr[i][k]<max)
+				  max=arr[i][k];
+		  }
+		  return max;
+	  }
+
+  }
+  public static int[][] MakeArray(int in[],int row,int col){
+	  int k=0;
+	  int arr[][]=new int[row][col];
+		  for(int i=0;i<row;i++){
+			  for(int j=0;j<col;j++){
+				  arr[i][j]=in[k++];
+			  }
+			  
+		  }
+		  return arr;
+		  
+		  
+  }
+  
+}

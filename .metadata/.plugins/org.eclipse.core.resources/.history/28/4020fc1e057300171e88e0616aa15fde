@@ -1,0 +1,40 @@
+package practice;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Olx {
+
+	public static void main(String args[]) throws IOException {
+		HashMap<String, Integer> dict = new HashMap<String, Integer>();
+		ArrayList<HashMap> al=new ArrayList<HashMap>();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine());
+		while (t > 0) {
+			String line[] = br.readLine().split(" ");
+			if (line[0].equals("S")) {
+				
+				dict.put("Date", Integer.parseInt(line[1]));
+				
+				String pc=line[2];
+				int d1=Integer.parseInt(pc.split(".")[0]);
+				int d2=Integer.parseInt(pc.split(".")[1]);
+				dict.put("pid", d1);
+				dict.put("cid", d2);
+				
+				pc=line[3];
+				int d3=Integer.parseInt(pc.split(".")[0]);
+				int d4=Integer.parseInt(pc.split(".")[1]);
+				dict.put("sid", d1);
+				dict.put("rid", d2);	
+				
+				al.add(dict);
+			}
+		}
+
+	}
+
+}

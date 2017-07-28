@@ -1,0 +1,76 @@
+package practice;
+
+public class TrapWater {
+  public static void main(String arga[]){
+	  
+  }
+  int GetWaterLevel(int input1,int input2,int input3[])
+  {
+	  int row=input1;
+	  int col=input2;
+	  int arr[][]=MakeArray(input3,row,col);
+	  for(int i=0;i<row;i++){
+		  for(int j=0;j<col;j++){
+			  int u,d,r,l;
+			  u=UpperBound(arr,i,j);
+			  u=LowerBound(arr,i,j,row);
+			  u=RightBound(arr,i,j);
+			  u=LeftBound(arr,i,j);
+			  
+		  }
+		  
+	  }
+  	return 1;
+  }
+  
+  public static int UpperBound(int arr[][],int i,int j){
+	  if(i==0) return 0;
+	  else{
+		  int min=Integer.MAX_VALUE;
+		  for(int k=i;k<=0;k++){
+			  if(arr[k][j]<min)
+				  min=arr[k][j];
+		  }
+		  return min;
+	  }
+
+  }
+  public static int LowerBound(int arr[][],int i,int j,int row){
+	  if(i==row) return 0;
+	  else{
+		  int min=Integer.MAX_VALUE;
+		  for(int k=i;k<=row;k++){     // go Down !!!!
+			  if(arr[k][j]<min)
+				  min=arr[k][j];
+		  }
+		  return min;
+	  }
+
+  }
+  public static int LeftBound(int arr[][],int i,int j){
+	  if(j==0) return 0;
+	  else{
+		  int min=Integer.MAX_VALUE;
+		  for(int k=i;k>=0;k--){     // go left !!!!
+			  if(arr[k][j]<min)
+				  min=arr[k][j];
+		  }
+		  return min;
+	  }
+
+  }
+  public static int[][] MakeArray(int in[],int row,int col){
+	  int k=0;
+	  int arr[][]=new int[row][col];
+		  for(int i=0;i<row;i++){
+			  for(int j=0;j<col;j++){
+				  arr[i][j]=in[k++];
+			  }
+			  
+		  }
+		  return arr;
+		  
+		  
+  }
+  
+}

@@ -1,0 +1,75 @@
+package practice;
+
+public class Rain {
+
+	int FindMaxWater2D(int[,] matrix, int m, int n)
+	{
+	    //Two extra 2d array with same size as matrix
+	    int[,] potentialWaterRows = new int[m, n];
+	    int[,] potentialWaterCol = new int[m, n];
+	    FindMaxHeightRows(matrix, potentialWaterRows, m, n);
+	    FindMaxHeightCols(matrix, potentialWaterCol, m, n);
+	    int sum = 0;
+	    for (int i = 0; i < m; ++i)
+	    {
+	        for (int j = 0; j < n; ++j)
+	        {
+	            Debug.Assert(Math.Min(potentialWaterRows[i, j], potentialWaterCol[i, j]) >= matrix[i, j]);
+	            sum += Math.Min(potentialWaterRows[i, j], potentialWaterCol[i, j]) - matrix[i, j];
+	        }
+	    }
+	    return sum;
+	}
+
+	void FindMaxHeightRows(int [,] matrix, int[,] newMatrixRows, int m, int n)
+	{
+	    for (int i = 0; i < m; ++i)
+	    {
+	        // Find the ascending sequence from left to right
+	        int[] ascL_R = new int[n];
+	        ascL_R[0] = matrix[i, 0];
+	        for (int j = 1; j < n; ++j)
+	        {
+	            ascL_R[j] =Math.Max(ascL_R[j-1], matrix[i,j]);
+	        }
+	        // Find the ascending sequence from Right to Left
+	        int[] ascR_L = new int[n];
+	        ascR_L[n-1] = matrix[i, n-1];
+	        for (int j = n-2; j >=0; --j)
+	        {
+	            ascR_L[j]= Math.Max(ascR_L[j+1], matrix[i,j]);
+	        }
+	              
+	        for(int j = 0; j < n; ++j)
+	        {
+	            newMatrixRows[i, j] = Math.Min(ascR_L[j], ascL_R[j]);
+	        }
+	    }
+	}
+	    
+	void FindMaxHeightCols(int [,] matrix, int[,] newMatrixCols, int m, int n)
+	{     
+	    for (int j = 0; j < n; ++j)
+	    {
+	        // Find the ascending sequence from Top to bottom
+	        int[] ascT_B = new int[n];
+	        ascT_B[0] =matrix[0, j];
+	        for (int i = 1; i < m; ++i)
+	        {
+	            ascT_B[i] =Math.Max(ascT_B[i-1], matrix[i,j]);
+	        }
+	        // Find the ascending sequence from Top to bottom
+	        int[] ascB_T = new int[n];
+	        ascB_T[m-1] = matrix[m-1, j];
+	        for (int i = m-2; i >=0; --i)
+	        {
+	            ascB_T[i] = (Math.Max(ascB_T[i+1], matrix[i, j]));
+	        }
+	              
+	        for(int i = 0; i < n; ++i)
+	        {
+	            newMatrixCols[i, j] = Math.Min(ascB_T[i], ascT_B[i]);
+	        }
+	    }
+	}
+}
